@@ -6,7 +6,7 @@ async function cargarVehiculos() {
 
   try {
     const respuesta = await fetch(
-      `${SUPABASE_URL}/rest/v1/main?select=*`,
+      `${SUPABASE_URL}/rest/v1/GLOW-CARS?select=*`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
