@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GLOW CARS | Vehículos Premium</title>
-<meta name="description" content="GLOW CARS - Vehículos seleccionados, calidad y confianza.">
+<meta name="description" content="GLOW CARS - Vehículos premium seleccionados con calidad, confianza y atención personalizada.">
 <style>
 *{
     margin:0;
@@ -15,7 +15,7 @@ html{
     scroll-behavior:smooth;
 }
 body{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#070707;
     color:#fff;
 }
@@ -28,7 +28,7 @@ a{
     max-width:1200px;
     margin:auto;
 }
-/* ================= HEADER ================= */
+/* HEADER */
 header{
     position:fixed;
     top:0;
@@ -65,16 +65,14 @@ nav a{
 nav a:hover{
     color:#d8b36a;
 }
-.menu-btn{
-    display:none;
-}
-/* ================= BUTTON ================= */
+/* BUTTONS */
 .btn{
     display:inline-block;
     padding:14px 23px;
     border-radius:8px;
     font-weight:bold;
     transition:.3s;
+    cursor:pointer;
 }
 .btn-gold{
     background:#d8b36a;
@@ -91,7 +89,7 @@ nav a:hover{
     border-color:#d8b36a;
     color:#d8b36a;
 }
-/* ================= HERO ================= */
+/* HERO */
 .hero{
     min-height:100vh;
     padding-top:78px;
@@ -161,7 +159,7 @@ nav a:hover{
     color:#777;
     letter-spacing:5px;
 }
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 section{
     padding:100px 0;
 }
@@ -176,7 +174,7 @@ section{
     color:#888;
     margin-top:10px;
 }
-/* ================= STOCK ================= */
+/* STOCK */
 .stock-tools{
     display:flex;
     justify-content:space-between;
@@ -191,6 +189,10 @@ section{
     padding:13px 15px;
     border-radius:8px;
     width:280px;
+    outline:none;
+}
+.search:focus{
+    border-color:#d8b36a;
 }
 .stock-grid{
     display:grid;
@@ -210,8 +212,7 @@ section{
 }
 .car-image{
     height:230px;
-    background:
-    linear-gradient(135deg,#252525,#0b0b0b);
+    background:linear-gradient(135deg,#252525,#0b0b0b);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -246,13 +247,14 @@ section{
     font-size:27px;
     font-weight:bold;
     margin:18px 0;
+    color:#fff;
 }
 .description{
     color:#888;
     line-height:1.6;
     margin-bottom:20px;
 }
-/* ================= ABOUT ================= */
+/* ABOUT */
 .about{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -284,8 +286,9 @@ section{
 .feature p{
     color:#888;
     line-height:1.6;
+    margin-top:8px;
 }
-/* ================= SERVICES ================= */
+/* SERVICES */
 .services{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -309,7 +312,7 @@ section{
     color:#888;
     line-height:1.6;
 }
-/* ================= CONTACT ================= */
+/* CONTACT */
 .contact-box{
     background:
     radial-gradient(circle at 80% 30%,rgba(216,179,106,.15),transparent 30%),
@@ -329,7 +332,7 @@ section{
 .contact-box p{
     color:#999;
 }
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
     border-top:1px solid #222;
     padding:35px 0;
@@ -340,10 +343,7 @@ footer{
     justify-content:space-between;
     gap:20px;
 }
-.footer strong{
-    color:#fff;
-}
-/* ================= MOBILE ================= */
+/* MOBILE */
 @media(max-width:850px){
     nav{
         display:none;
@@ -413,7 +413,7 @@ Ver vehículos
 </a>
 </div>
 </header>
-<!-- ================= HERO ================= -->
+<!-- HERO -->
 <section class="hero" id="inicio">
 <div class="container hero-content">
 <div>
@@ -446,7 +446,7 @@ PREMIUM SELECTION
 </div>
 </div>
 </section>
-<!-- ================= STOCK ================= -->
+<!-- STOCK -->
 <section id="stock">
 <div class="container">
 <div class="section-title">
@@ -457,7 +457,7 @@ Nuestro stock
 Vehículos disponibles
 </h2>
 <p>
-Encuentra el vehículo que estás buscando.
+Consulta nuestro stock actualizado.
 </p>
 </div>
 <div class="stock-tools">
@@ -475,17 +475,17 @@ GLOW CARS
 </div>
 <div class="car-info">
 <h3>
-Cargando vehículos...
+Cargando catálogo...
 </h3>
 <p class="description">
-Estamos cargando nuestro catálogo.
+Estamos conectando con nuestro stock.
 </p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<!-- ================= NOSOTROS ================= -->
+<!-- NOSOTROS -->
 <section id="nosotros">
 <div class="container about">
 <div class="about-text">
@@ -507,9 +507,7 @@ sencilla y especial.
 </div>
 <div class="features">
 <div class="feature">
-<h3>
-01
-</h3>
+<h3>01</h3>
 <h4>
 Vehículos seleccionados
 </h4>
@@ -518,9 +516,7 @@ Coches escogidos cuidadosamente para nuestro catálogo.
 </p>
 </div>
 <div class="feature">
-<h3>
-02
-</h3>
+<h3>02</h3>
 <h4>
 Transparencia
 </h4>
@@ -529,9 +525,7 @@ Información clara para que puedas decidir con tranquilidad.
 </p>
 </div>
 <div class="feature">
-<h3>
-03
-</h3>
+<h3>03</h3>
 <h4>
 Atención personalizada
 </h4>
@@ -540,9 +534,7 @@ Te acompañamos durante todo el proceso.
 </p>
 </div>
 <div class="feature">
-<h3>
-04
-</h3>
+<h3>04</h3>
 <h4>
 Experiencia premium
 </h4>
@@ -553,7 +545,7 @@ Una imagen y servicio a la altura de nuestros vehículos.
 </div>
 </div>
 </section>
-<!-- ================= SERVICIOS ================= -->
+<!-- SERVICIOS -->
 <section id="servicios">
 <div class="container">
 <div class="section-title">
@@ -615,7 +607,7 @@ Coordinamos contigo todo el proceso de entrega.
 </div>
 </div>
 </section>
-<!-- ================= CONTACTO ================= -->
+<!-- CONTACTO -->
 <section id="contacto">
 <div class="container">
 <div class="contact-box">
@@ -640,7 +632,6 @@ Contactar por WhatsApp
 </div>
 </div>
 </section>
-<!-- ================= FOOTER ================= -->
 <footer>
 <div class="container footer">
 <div>
@@ -654,23 +645,27 @@ Vehículos seleccionados
 </div>
 </footer>
 <script>
-/*
-====================================================
-CATÁLOGO SUPABASE
-====================================================
-La página está preparada para conectarse con
-tu proyecto GLOW-CARS.
-Cuando terminemos de configurar la clave pública
-de Supabase, el catálogo aparecerá automáticamente.
-*/
+/* ================================
+   SUPABASE
+================================ */
 const SUPABASE_URL =
 "https://hqsiglpdnylsfbideglc.supabase.co";
-const SUPABASE_ANON_KEY =
-"";
+const SUPABASE_KEY =
+"sb_publishable_elNqKmc2_3zpeDxrlFKMFw_RdDz4nXz";
 const TABLE =
 "GLOW-CARS";
-let vehicles = [];
-function money(value){
+let vehicles=[];
+/* ESCAPAR TEXTO */
+function escapeHTML(value){
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+/* PRECIO */
+function formatPrice(value){
 return new Intl.NumberFormat(
 "es-ES",
 {
@@ -680,38 +675,37 @@ maximumFractionDigits:0
 }
 ).format(Number(value)||0);
 }
-function escapeHTML(value){
-return String(value ?? "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-}
-function displayCars(){
+/* MOSTRAR VEHÍCULOS */
+function renderVehicles(){
 const search =
 document
 .getElementById("search")
 .value
-.toLowerCase();
+.toLowerCase()
+.trim();
 const filtered =
-vehicles.filter(vehicle => {
-const name =
-String(vehicle["Marca-modelo"] || "")
-.toLowerCase();
-return name.includes(search);
+vehicles.filter(vehicle=>{
+const model =
+String(
+vehicle["Marca-modelo"] ||
+vehicle["marca_modelo"] ||
+vehicle["modelo"] ||
+""
+).toLowerCase();
+return model.includes(search);
 });
 const container =
 document.getElementById("cars");
-if(!filtered.length){
-container.innerHTML = `
+if(filtered.length===0){
+container.innerHTML=`
 <div class="car-card">
 <div class="car-info">
 <h3>
 No hay vehículos disponibles
 </h3>
 <p class="description">
-Consulta nuestro stock próximamente.
+Actualmente no tenemos vehículos que coincidan
+con tu búsqueda.
 </p>
 </div>
 </div>
@@ -719,15 +713,52 @@ Consulta nuestro stock próximamente.
 return;
 }
 container.innerHTML =
-filtered.map(vehicle => `
+filtered.map(vehicle=>{
+const name =
+vehicle["Marca-modelo"] ||
+vehicle["marca_modelo"] ||
+vehicle["modelo"] ||
+"Vehículo GLOW CARS";
+const year =
+vehicle["Año"] ||
+vehicle["año"] ||
+"";
+const km =
+vehicle["Kilómetros"] ||
+vehicle["kilometros"] ||
+vehicle["km"] ||
+0;
+const fuel =
+vehicle["Combustible"] ||
+vehicle["combustible"] ||
+"";
+const gearbox =
+vehicle["Cambio"] ||
+vehicle["cambio"] ||
+"";
+const price =
+vehicle["Precio"] ||
+vehicle["precio"] ||
+0;
+const description =
+vehicle["Descripción"] ||
+vehicle["descripcion"] ||
+"Vehículo seleccionado por GLOW CARS.";
+const image =
+vehicle["Imagen"] ||
+vehicle["imagen"] ||
+vehicle["image"] ||
+"";
+return `
 <article class="car-card">
 <div class="car-image">
 ${
-vehicle["Imagen"]
+image
 ?
 `<img
-src="${escapeHTML(vehicle["Imagen"])}"
-alt="${escapeHTML(vehicle["Marca-modelo"])}"
+src="${escapeHTML(image)}"
+alt="${escapeHTML(name)}"
+loading="lazy"
 >`
 :
 "GLOW CARS"
@@ -735,30 +766,43 @@ alt="${escapeHTML(vehicle["Marca-modelo"])}"
 </div>
 <div class="car-info">
 <h3>
-${escapeHTML(vehicle["Marca-modelo"])}
+${escapeHTML(name)}
 </h3>
 <div class="specs">
-<span class="spec">
-${escapeHTML(vehicle["Año"])}
-</span>
-<span class="spec">
-${Number(vehicle["Kilómetros"] || 0).toLocaleString("es-ES")} km
-</span>
-<span class="spec">
-${escapeHTML(vehicle["Combustible"])}
-</span>
-<span class="spec">
-${escapeHTML(vehicle["Cambio"])}
-</span>
+${
+year
+?
+`<span class="spec">${escapeHTML(year)}</span>`
+:
+""
+}
+${
+km
+?
+`<span class="spec">${Number(km).toLocaleString("es-ES")} km</span>`
+:
+""
+}
+${
+fuel
+?
+`<span class="spec">${escapeHTML(fuel)}</span>`
+:
+""
+}
+${
+gearbox
+?
+`<span class="spec">${escapeHTML(gearbox)}</span>`
+:
+""
+}
 </div>
 <div class="price">
-${money(vehicle["Precio"])}
+${formatPrice(price)}
 </div>
 <p class="description">
-${escapeHTML(
-vehicle["Descripción"] ||
-"Vehículo disponible en GLOW CARS."
-)}
+${escapeHTML(description)}
 </p>
 <a
 href="#contacto"
@@ -768,9 +812,13 @@ Me interesa
 </a>
 </div>
 </article>
-`).join("");
+`;
+}).join("");
 }
+/* CARGAR SUPABASE */
 async function loadVehicles(){
+const container =
+document.getElementById("cars");
 try{
 const response =
 await fetch(
@@ -779,45 +827,57 @@ SUPABASE_URL +
 encodeURIComponent(TABLE) +
 "?select=*",
 {
+method:"GET",
 headers:{
-apikey:
-SUPABASE_ANON_KEY,
-Authorization:
-"Bearer " +
-SUPABASE_ANON_KEY
+"apikey":SUPABASE_KEY,
+"Authorization":
+"Bearer "+SUPABASE_KEY,
+"Content-Type":
+"application/json"
 }
 }
 );
 if(!response.ok){
-throw new Error("Supabase error");
+const errorText =
+await response.text();
+throw new Error(
+"Supabase: "+
+response.status+
+" "+
+errorText
+);
 }
 vehicles =
 await response.json();
-displayCars();
+renderVehicles();
 }catch(error){
-console.error(error);
-document
-.getElementById("cars")
-.innerHTML = `
+console.error(
+"GLOW CARS:",
+error
+);
+container.innerHTML=`
 <div class="car-card">
 <div class="car-info">
 <h3>
-Catálogo
+No se ha podido cargar el catálogo
 </h3>
 <p class="description">
-No se ha podido cargar el stock.
+Estamos actualizando nuestro stock.
+Inténtalo de nuevo en unos minutos.
 </p>
 </div>
 </div>
 `;
 }
 }
+/* BUSCADOR */
 document
 .getElementById("search")
 .addEventListener(
 "input",
-displayCars
+renderVehicles
 );
+/* INICIAR */
 loadVehicles();
 </script>
 </body>
