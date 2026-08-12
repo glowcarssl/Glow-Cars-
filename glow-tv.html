@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GLOW CARS TV | Vídeos y proyectos</title>
+<style>
+:root{--bg:#050505;--card:#101010;--gold:#d8b36a;--muted:#929292;--line:#252525}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(5,5,5,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{min-height:72px;display:flex;align-items:center;gap:16px}.logo{width:145px;height:auto;object-fit:contain}.back{margin-left:auto;border:1px solid #444;border-radius:9px;padding:10px 13px;font-weight:800;color:#fff;text-decoration:none}
+.hero{padding:52px 0 24px}.eyebrow{font-size:11px;letter-spacing:3px;color:var(--gold);font-weight:900;text-transform:uppercase}.hero h1{font-size:clamp(38px,7vw,72px);line-height:.95;margin:12px 0}.hero p{color:var(--muted);max-width:680px;line-height:1.7;font-size:17px}
+.filters{display:flex;gap:8px;overflow:auto;padding:10px 0 24px}.filter{white-space:nowrap;background:#111;border:1px solid #333;color:#ccc;border-radius:999px;padding:9px 14px;cursor:pointer}.filter.active{background:var(--gold);color:#080808;border-color:var(--gold);font-weight:900}
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:70px}.post{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}.media{aspect-ratio:9/16;background:#090909;position:relative}.media video,.media img{width:100%;height:100%;object-fit:cover;display:block}.media .placeholder{height:100%;display:grid;place-items:center;color:#666;font-size:42px}.tag{position:absolute;top:12px;left:12px;background:rgba(216,179,106,.95);color:#080808;padding:7px 10px;border-radius:7px;font-size:10px;font-weight:900;letter-spacing:1px}.body{padding:16px}.body h2{font-size:19px;margin:0 0 8px}.body p{color:#999;line-height:1.55;margin:0}.actions{display:flex;gap:8px;margin-top:14px}.btn{border:1px solid #444;background:#151515;color:#fff;border-radius:9px;padding:10px 12px;font-weight:800;text-decoration:none;cursor:pointer}.btn.gold{background:var(--gold);border-color:var(--gold);color:#080808}.empty{text-align:center;color:#777;border:1px dashed #333;border-radius:16px;padding:45px;grid-column:1/-1}.loading{color:#777;padding:30px 0}
+@media(max-width:800px){.feed{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.nav{min-height:66px}.logo{width:125px}.feed{grid-template-columns:1fr}.hero{padding-top:35px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a href="index.html"><img class="logo" src="8C982453-6D48-46D9-93F0-8BE12D44B720.png" alt="GLOW CARS"></a><a class="back" href="index.html">← Volver a GLOW CARS</a></div></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">GLOW CARS · TV</div><h1>Vídeos, coches<br>y proyectos.</h1><p>Descubre nuestros vehículos, importaciones desde Reino Unido, entregas y proyectos. Un espacio visual pensado para móvil y redes sociales.</p></section>
+<div class="filters"><button class="filter active" data-filter="all">Todo</button><button class="filter" data-filter="video">Vídeos</button><button class="filter" data-filter="reel">Reels</button><button class="filter" data-filter="project">Proyectos</button></div>
+<section id="feed" class="feed"><div class="loading">Cargando contenido…</div></section>
+</main>
+<script>
+const U='https://hqsiglpdnylsfbideglc.supabase.co';
+const K='sb_publishable_elNqKmc2_3zpeDxrlFKMFw_RdDz4nXz';
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let posts=[];let filter='all';
+async function load(){const r=await fetch(`${U}/rest/v1/glow_cars_content_posts?select=*&published=eq.true&order=featured.desc,sort_order.asc,created_at.desc`,{headers:{apikey:K,Authorization:`Bearer ${K}`}});if(!r.ok)throw new Error(await r.text());posts=await r.json();render()}
+function render(){const list=filter==='all'?posts:posts.filter(p=>p.content_type===filter);const feed=document.getElementById('feed');if(!list.length){feed.innerHTML='<div class="empty">Todavía no hay publicaciones en esta categoría.</div>';return}feed.innerHTML=list.map(p=>{const label=p.content_type==='project'?'PROYECTO':p.content_type==='reel'?'REEL':'VÍDEO';const media=p.video_url?`<video src="${esc(p.video_url)}" poster="${esc(p.thumbnail_url||'')}" controls playsinline preload="metadata"></video>`:(p.thumbnail_url?`<img src="${esc(p.thumbnail_url)}" alt="${esc(p.title)}" loading="lazy">`:'<div class="placeholder">G</div>');const share=encodeURIComponent(`${p.title} | GLOW CARS`);return `<article class="post"><div class="media">${media}<span class="tag">${label}</span></div><div class="body"><h2>${esc(p.title)}</h2><p>${esc(p.description||'')}</p><div class="actions"><button class="btn" onclick="sharePost('${share}')">↗ Compartir</button>${p.car_id?`<a class="btn gold" href="index.html#coche-${p.car_id}">🚗 Ver coche</a>`:''}</div></div></article>`}).join('')}
+async function sharePost(encoded){const title=decodeURIComponent(encoded);const url=location.href;if(navigator.share){try{await navigator.share({title,text:title,url})}catch(e){}}else{try{await navigator.clipboard.writeText(url);alert('Enlace copiado')}catch(e){}}}
+document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;render()}));
+load().catch(()=>document.getElementById('feed').innerHTML='<div class="empty">No se ha podido cargar el contenido. Inténtalo de nuevo más tarde.</div>');
+</script>
+</body>
+</html>
