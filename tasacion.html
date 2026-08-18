@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GLOW CARS · Tasación</title>
+<style>
+:root{--bg:#070707;--panel:#111;--line:#292929;--gold:#d8b36a;--muted:#999;--green:#4fc37b;--yellow:#e7bd55;--red:#e05b5b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}.wrap{width:94%;max-width:1180px;margin:auto}.top{padding:14px 0;border-bottom:1px solid var(--line)}.topbar{display:flex;align-items:center;gap:14px}.logo{height:52px}.spacer{flex:1}.btn{border:0;border-radius:9px;padding:12px 15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}.gold{background:var(--gold);color:#080808}.dark{background:#171717;color:#fff;border:1px solid #444}.main{padding:24px 0}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:18px}.form{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.field{display:flex;flex-direction:column;gap:7px}.full{grid-column:1/-1}label{font-size:12px;color:var(--gold);font-weight:800;text-transform:uppercase}input,select{background:#090909;color:#fff;border:1px solid #333;border-radius:8px;padding:13px;font:inherit}.hint{color:#777;font-size:12px;margin-top:10px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}.score{font-size:42px;font-weight:900;color:var(--gold);margin:8px 0}.range{font-size:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.metric{background:#0b0b0b;border:1px solid #292929;border-radius:12px;padding:16px}.metric small{display:block;color:#888;margin-bottom:7px}.metric strong{font-size:22px}.status{display:inline-block;padding:7px 10px;border-radius:8px;font-weight:800;font-size:12px}.high{background:#153d27;color:#7be0a2}.medium{background:#493b16;color:#f4d46f}.low{background:#481c1c;color:#ff8f8f}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:11px;border-bottom:1px solid #292929}.table th{color:var(--gold);font-size:12px}.hidden{display:none}.result-note{color:#888;font-size:12px;line-height:1.5}.history-item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #292929}.history-item:last-child{border-bottom:0}.history-item strong{display:block}.history-item span{color:#888;font-size:12px}@media(max-width:700px){.form,.hero,.grid3{grid-template-columns:1fr}.full{grid-column:auto}.logo{height:44px}.score{font-size:34px}.table{font-size:13px}.topbar .btn{padding:10px 11px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap topbar"><img class="logo" src="8C982453-6D48-46D9-93F0-8BE12D44B720.png"><div><strong>GLOW CARS</strong><div style="color:#888;font-size:12px">Tasación de mercado</div></div><div class="spacer"></div><a class="btn dark" href="admin.html">← Administrador</a></div></header>
+<main class="wrap main">
+<section class="panel">
+<h2>🔎 TASACIÓN GLOW CARS</h2>
+<p class="hint">Introduce los datos del vehículo que estás valorando en subasta. Esta primera versión prepara el análisis y la estructura de comparables; las fuentes de mercado se conectarán después mediante accesos autorizados.</p>
+<form id="form"><div class="form">
+<div class="field"><label>Marca</label><input id="marca" placeholder="Mercedes" required></div>
+<div class="field"><label>Modelo</label><input id="modelo" placeholder="Clase E" required></div>
+<div class="field"><label>Motor / versión</label><input id="motor" placeholder="E 220 d"></div>
+<div class="field"><label>Año</label><input id="ano" type="number" min="1980" max="2035" placeholder="2021" required></div>
+<div class="field"><label>Kilómetros</label><input id="km" type="number" min="0" placeholder="86000" required></div>
+<div class="field"><label>Combustible</label><select id="comb"><option>Diésel</option><option>Gasolina</option><option>Híbrido</option><option>Eléctrico</option><option>GLP</option><option>Otro</option></select></div>
+<div class="field"><label>Cambio</label><select id="cambio"><option>Automático</option><option>Manual</option><option>Otro</option></select></div>
+<div class="field"><label>Carrocería</label><select id="carro"><option>Berlina</option><option>SUV</option><option>Familiar</option><option>Compacto</option><option>Coupé</option><option>Cabrio</option><option>Monovolumen</option><option>Otro</option></select></div>
+</div><div style="margin-top:15px"><button class="btn gold" type="submit">🔎 ANALIZAR MERCADO</button></div></form>
+</section>
+<section id="results" class="hidden">
+<div class="hero">
+<div class="panel"><div style="color:#d8b36a;font-weight:800;font-size:12px">VALOR DE MERCADO GLOW CARS</div><div class="score" id="value">—</div><div class="range" id="range">—</div><div style="margin-top:12px"><span id="confidence" class="status medium">Pendiente</span></div></div>
+<div class="panel"><div style="color:#d8b36a;font-weight:800;font-size:12px">PUJA MÁXIMA</div><div class="score" id="bid">—</div><div class="hint">Calculada con costes y margen introducidos abajo. Es una orientación, no una tasación oficial.</div></div>
+</div>
+<div class="panel"><h3>📊 Resumen del mercado</h3><div class="grid3"><div class="metric"><small>Comparables</small><strong id="count">—</strong></div><div class="metric"><small>Mediana</small><strong id="median">—</strong></div><div class="metric"><small>Rango</small><strong id="marketRange">—</strong></div></div><p class="result-note" id="method"></p></div>
+<div class="panel"><h3>🔨 Parámetros de compra</h3><div class="form"><div class="field"><label>Transporte (€)</label><input id="transport" type="number" value="500"></div><div class="field"><label>Preparación (€)</label><input id="prep" type="number" value="600"></div><div class="field"><label>Garantía / colchón (€)</label><input id="warranty" type="number" value="500"></div><div class="field"><label>Otros (€)</label><input id="other" type="number" value="200"></div><div class="field"><label>Margen deseado (€)</label><input id="margin" type="number" value="3000"></div></div><button class="btn gold" style="margin-top:15px" id="recalc">Recalcular puja máxima</button></div>
+<div class="panel"><h3>🚗 Comparables</h3><table class="table"><thead><tr><th>Vehículo</th><th>Año</th><th>KM</th><th>Precio</th><th>Similitud</th></tr></thead><tbody id="comparables"></tbody></table><p class="result-note">Los comparables reales aparecerán cuando conectemos las fuentes de mercado autorizadas o importemos anuncios. No se presentan datos inventados como si fueran anuncios reales.</p></div>
+<div class="panel"><button class="btn gold" id="save">💾 Guardar tasación</button><span id="saveStatus" class="hint"></span></div>
+</section>
+<section class="panel"><h3>🗂 Historial de tasaciones</h3><div id="history"><div class="hint">Todavía no hay tasaciones guardadas.</div></div></section>
+</main>
+<script>
+const $=id=>document.getElementById(id);let current=null;
+const euro=n=>Number(n||0).toLocaleString('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+function score(km,target){const d=Math.abs(km-target)/Math.max(target,1);return Math.max(45,Math.round(100-d*100))}
+function analyze(e){e.preventDefault();const data={marca:$('marca').value.trim(),modelo:$('modelo').value.trim(),motor:$('motor').value.trim(),ano:Number($('ano').value),km:Number($('km').value),comb:$('comb').value,cambio:$('cambio').value,carro:$('carro').value};
+// Placeholder valuation: intentionally conservative until real market sources are connected.
+const base=12000+Math.max(0,data.ano-2010)*950;const kmAdj=Math.max(-0.22,Math.min(.12,(80000-data.km)/500000));const value=Math.round((base*(1+kmAdj))/100)*100;current={...data,value};render();}
+function render(){if(!current)return;$('results').classList.remove('hidden');const v=current.value;const lo=Math.round(v*.95/100)*100,hi=Math.round(v*1.05/100)*100;$('value').textContent=euro(v);$('range').textContent=`Rango orientativo: ${euro(lo)} – ${euro(hi)}`;$('confidence').textContent='Baja · fuentes reales pendientes';$('confidence').className='status low';$('count').textContent='0';$('median').textContent='—';$('marketRange').textContent='—';$('method').textContent='Esta pantalla está preparada para el motor real de comparables. La cifra provisional no debe utilizarse para pujar: sustituiremos este cálculo por datos de mercado contrastados antes de activar la valoración real.';recalc();$('comparables').innerHTML='<tr><td colspan="5" style="color:#777">Sin comparables conectados todavía.</td></tr>';window.scrollTo({top:document.getElementById('results').offsetTop-10,behavior:'smooth'})}
+function recalc(){if(!current)return;const costs=['transport','prep','warranty','other','margin'].reduce((s,id)=>s+Number($(id).value||0),0);$('bid').textContent=euro(Math.max(0,current.value-costs))}
+$('form').onsubmit=analyze;$('recalc').onclick=recalc;
+$('save').onclick=()=>{if(!current)return;const item={...current,savedAt:new Date().toISOString(),bid:$('bid').textContent};const list=JSON.parse(localStorage.getItem('glowTasaciones')||'[]');list.unshift(item);localStorage.setItem('glowTasaciones',JSON.stringify(list.slice(0,30)));$('saveStatus').textContent=' · Guardada en este dispositivo';loadHistory()};
+function loadHistory(){const list=JSON.parse(localStorage.getItem('glowTasaciones')||'[]');$('history').innerHTML=list.length?list.map(x=>`<div class="history-item"><div><strong>${x.marca} ${x.modelo}</strong><span>${x.ano} · ${Number(x.km).toLocaleString('es-ES')} km · ${x.motor||'sin versión'}</span></div><div><strong>${euro(x.value)}</strong><span>${new Date(x.savedAt).toLocaleDateString('es-ES')}</span></div></div>`).join(''):'<div class="hint">Todavía no hay tasaciones guardadas.</div>'}
+loadHistory();
+</script>
+</body>
+</html>
