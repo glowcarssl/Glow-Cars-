@@ -1,0 +1,34 @@
+name: Fix GLOW CARS generator
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix generator formatting
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p = Path('admin.html')
+          s = p.read_text(encoding='utf-8')
+          start = s.find('function generateAd()')
+          end = s.find('async function copyAd()', start)
+          if start < 0 or end < 0:
+              raise SystemExit('generator functions not found')
+          new = r'''function cleanKeys(v){return String(v||'').replace(/\\n/g,' ').replace(/\\r/g,' ').replace(/\s+/g,' ').replace(/[•·]+/g,' ').replace(/\s*,\s*/g,', ').trim()}function generateAd(){let m=$('gtMarca').value.trim(),mo=$('gtModelo').value.trim(),a=$('gtAno').value.trim(),km=$('gtKm').value.trim(),c=$('gtComb').value.trim(),ca=$('gtCambio').value.trim(),p=$('gtPot').value.trim(),col=$('gtColor').value.trim(),keys=cleanKeys($('gtKeys').value),style=$('gtStyle').value;if(!m||!mo){$('genStatus').textContent='Rellena al menos Marca y Modelo.';return}let title=(m+' '+mo).toUpperCase()+(a?' · '+a:'')+(km?' · '+Number(km).toLocaleString('es-ES')+' KM':'');let details=[];if(a)details.push('año '+a);if(km)details.push(Number(km).toLocaleString('es-ES')+' km');if(c)details.push(c.toLowerCase());if(ca)details.push('cambio '+ca.toLowerCase());if(p)details.push(p);if(col)details.push('color '+col.toLowerCase());let intro=style==='premium'?'Presentamos esta cuidada unidad de '+m+' '+mo:style==='wallapop'?m+' '+mo+(a?' de '+a:'')+(km?' con '+Number(km).toLocaleString('es-ES')+' km':''):('GLOW CARS presenta este '+m+' '+mo);let text=title+'\n\n'+intro+(details.length?' '+details.join(', ')+'.':'.');if(keys){let list=keys.split(/[,;]+/).map(x=>x.trim()).filter(Boolean);text+='\n\nEquipamiento y aspectos destacados:\n'+list.map(x=>'• '+x).join('\n')+'.'}text+='\n\n'+(style==='wallapop'?'Una unidad cuidada y bien equipada. Contacta con GLOW CARS para más información o concertar una visita.':'Unidad seleccionada por GLOW CARS. Para más información, fotografías adicionales o concertar una visita, contacta con nuestro equipo.')+'\n\nGLOW CARS · Vehículos seleccionados y atención profesional.';$('generatedAd').value=text;$('genStatus').textContent='✅ Texto generado correctamente, sin caracteres extraños. Puedes copiarlo directamente.'}'''
+          s = s[:start] + new + s[end:]
+          p.write_text(s, encoding='utf-8')
+      - name: Commit fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add admin.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Fix generator text formatting [skip ci]'
+          git push
