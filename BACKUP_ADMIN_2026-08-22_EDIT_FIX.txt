@@ -1,0 +1,1 @@
+Backup marker created before repairing the Modificar function. The vehicle data and photo URLs are stored in Supabase and are not modified by this repair.
