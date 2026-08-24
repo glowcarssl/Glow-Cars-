@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#060606"/><stop offset="0.6" stop-color="#111"/><stop offset="1" stop-color="#070707"/></linearGradient>
+  <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#151515"/><stop offset="1" stop-color="#050505"/></linearGradient>
+  <radialGradient id="stage" cx="50%" cy="45%" r="65%"><stop offset="0" stop-color="#262626"/><stop offset="0.66" stop-color="#151515"/><stop offset="1" stop-color="#0a0a0a"/></radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0bd"/><stop offset="0.22" stop-color="#f8c774"/><stop offset="0.55" stop-color="#d99b3f"/><stop offset="0.8" stop-color="#ffd98e"/><stop offset="1" stop-color="#b87725"/></linearGradient>
+  <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="24"/></filter>
+</defs>
+<rect width="1600" height="1000" fill="url(#wall)"/>
+<g stroke="#1d1d1d" stroke-width="2" opacity="0.8">
+  <path d="M320 0V650M640 0V650M960 0V650M1280 0V650"/>
+</g>
+<g>
+  <rect x="74" y="0" width="10" height="645" fill="#f1b259" filter="url(#glow)"/>
+  <rect x="370" y="0" width="8" height="645" fill="#f1b259" filter="url(#glow)"/>
+  <rect x="1222" y="0" width="8" height="645" fill="#f1b259" filter="url(#glow)"/>
+  <rect x="1516" y="0" width="10" height="645" fill="#f1b259" filter="url(#glow)"/>
+</g>
+<g transform="translate(0,12)">
+  <path d="M500 156 C620 72 808 74 930 124 C1004 155 1069 161 1128 166" fill="none" stroke="url(#gold)" stroke-width="11" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M470 194 C603 171 743 170 882 176 C971 180 1060 183 1139 184" fill="none" stroke="url(#gold)" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
+  <text x="800" y="300" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="146" font-weight="900" letter-spacing="7" fill="url(#gold)" filter="url(#glow)">GLOW CARS</text>
+</g>
+<rect y="570" width="1600" height="430" fill="url(#floor)"/>
+<ellipse cx="800" cy="880" rx="670" ry="95" fill="#df9d43" opacity="0.18" filter="url(#soft)"/>
+<ellipse cx="800" cy="785" rx="680" ry="205" fill="url(#stage)" stroke="#3e3e3e" stroke-width="5"/>
+<ellipse cx="800" cy="785" rx="688" ry="212" fill="none" stroke="#f2b158" stroke-width="9" filter="url(#glow)"/>
+<ellipse cx="800" cy="792" rx="645" ry="174" fill="none" stroke="#9f7337" stroke-width="2" opacity="0.7"/>
+<path d="M100 862 C420 928 1180 928 1500 862" fill="none" stroke="#f2b158" stroke-width="9" opacity="0.85" filter="url(#glow)"/>
+<rect y="835" width="1600" height="165" fill="url(#floor)" opacity="0.26"/>
+</svg>
