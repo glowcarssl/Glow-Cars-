@@ -1,1 +1,197 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-store"><title>GLOW CARS · Administrador</title><style>html,body{margin:0;width:100%;height:100%;background:#080808}iframe{width:100%;height:100%;border:0}</style></head><body><iframe id="admin" src="./admin.html" title="GLOW CARS Administrador"></iframe><script>(function(){const frame=document.getElementById('admin');function install(){const w=frame.contentWindow,d=frame.contentDocument;if(!d||d.__glowFixed)return;const filters=d.querySelector('.filters');if(!filters)return;d.__glowFixed=true;const box=d.createElement('div');box.style.cssText='display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap';box.innerHTML='<input id="glowVehicleSearch" type="search" placeholder="🔎 Buscar coche: BMW, X6M, Mercedes..." autocomplete="off" style="flex:1;min-width:220px;background:#090909;color:#fff;border:1px solid #333;border-radius:8px;padding:11px;font:inherit">';filters.parentNode.insertBefore(box,filters);const input=d.getElementById('glowVehicleSearch');const apply=()=>{const q=input.value.trim().toLocaleLowerCase('es');d.querySelectorAll('#cars .car').forEach(card=>{card.style.display=(!q||(card.textContent||'').toLocaleLowerCase('es').includes(q))?'':'none'});const n=[...d.querySelectorAll('#cars .car')].filter(x=>x.style.display!=='none').length;const s=d.getElementById('status');if(s&&q)s.textContent=n+' vehículo(s) coinciden con «'+input.value+'».'};input.addEventListener('input',apply);d.addEventListener('click',function(e){const btn=e.target.closest('#cars .actions button');if(!btn)return;const oc=btn.getAttribute('onclick')||'';const m=oc.match(/^edit\((\d+)\)$/);if(!m)return;e.preventDefault();e.stopImmediatePropagation();const id=Number(m[1]);const r=(w.rows||[]).find(x=>Number(x.id)===id);if(!r)return;const set=(id,v)=>{const el=d.getElementById(id);if(el)el.value=v??''};set('id',r.id);set('modelo',r['Marca-modelo']);set('precio',r.Precio);set('ano',r['Año']);set('km',r['Kilómetros']);set('combustible',r.Combustible);set('cambio',r.Cambio);set('estado',r.estado);set('descripcion',r.Descripcion);set('imagen',r.Imagen);const ed=d.getElementById('editor');if(ed){ed.hidden=false;ed.scrollIntoView({behavior:'smooth',block:'start'})}},true);const oldLoad=w.load;if(typeof oldLoad==='function')w.load=function(){const r=oldLoad.apply(this,arguments);Promise.resolve(r).then(()=>setTimeout(()=>{if(d.getElementById('glowVehicleSearch'))apply()},50));return r};}frame.addEventListener('load',()=>setTimeout(install,50));})();</script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>GLOW CARS · Administrador</title>
+<style>
+html,body{margin:0;width:100%;height:100%;background:#080808}
+iframe{width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<iframe id="admin" src="./admin.html" title="GLOW CARS Administrador"></iframe>
+<script type="module">
+const frame=document.getElementById('admin');
+const U='https://hqsiglpdnylsfbideglc.supabase.co';
+const K='sb_publishable_elNqKmc2_3zpeDxrlFKMFw_RdDz4nXz';
+const BUCKET='glow-cars';
+let segmenterPromise=null;
+
+function uploadRaw(file,path){
+  return fetch(`${U}/storage/v1/object/${BUCKET}/${path}`,{
+    method:'POST',
+    headers:{apikey:K,Authorization:`Bearer ${K}`,'Content-Type':file.type||'image/jpeg','x-upsert':'false'},
+    body:file
+  }).then(async r=>{if(!r.ok)throw new Error(await r.text());return `${U}/storage/v1/object/public/${BUCKET}/${path}`});
+}
+
+async function getSegmenter(){
+  if(!segmenterPromise){
+    segmenterPromise=(async()=>{
+      const {pipeline}=await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/+esm');
+      return pipeline('image-segmentation','Xenova/segformer-b0-finetuned-ade-512-512',{quantized:true});
+    })();
+  }
+  return segmenterPromise;
+}
+
+function drawShowroom(ctx,w,h){
+  const g=ctx.createLinearGradient(0,0,0,h);
+  g.addColorStop(0,'#111');g.addColorStop(.65,'#080808');g.addColorStop(1,'#030303');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+
+  const glow=ctx.createRadialGradient(w*.5,h*.38,20,w*.5,h*.38,w*.55);
+  glow.addColorStop(0,'rgba(216,179,106,.12)');glow.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
+
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`900 ${Math.round(w*.075)}px Arial`;
+  ctx.shadowColor='rgba(216,179,106,.35)';ctx.shadowBlur=28;ctx.fillStyle='#d8b36a';
+  ctx.fillText('GLOW CARS',w/2,h*.19);ctx.shadowBlur=0;
+  ctx.font=`700 ${Math.round(w*.014)}px Arial`;ctx.letterSpacing='4px';ctx.fillStyle='#9b7c45';
+  ctx.fillText('SHOWROOM',w/2,h*.115);
+
+  ctx.strokeStyle='#d8b36a';ctx.lineWidth=Math.max(2,w*.0015);
+  [w*.08,w*.92].forEach(x=>{ctx.beginPath();ctx.moveTo(x,h*.08);ctx.lineTo(x,h*.76);ctx.stroke()});
+
+  ctx.save();ctx.translate(w/2,h*.74);ctx.scale(1,.28);
+  const pg=ctx.createRadialGradient(0,0,w*.08,0,0,w*.42);
+  pg.addColorStop(0,'#252525');pg.addColorStop(.72,'#111');pg.addColorStop(1,'#050505');
+  ctx.fillStyle=pg;ctx.beginPath();ctx.arc(0,0,w*.43,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#d8b36a';ctx.lineWidth=8;ctx.stroke();ctx.restore();
+
+  const floor=ctx.createLinearGradient(0,h*.72,0,h);
+  floor.addColorStop(0,'rgba(255,255,255,.025)');floor.addColorStop(1,'rgba(0,0,0,.45)');
+  ctx.fillStyle=floor;ctx.fillRect(0,h*.72,w,h*.28);
+}
+
+async function imageFromFile(file){
+  if('createImageBitmap' in window)return createImageBitmap(file);
+  const url=URL.createObjectURL(file);
+  try{
+    return await new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=reject;i.src=url});
+  }finally{setTimeout(()=>URL.revokeObjectURL(url),1000)}
+}
+
+async function processVehiclePhoto(file,onStatus){
+  onStatus?.('Analizando coche con IA…');
+  const img=await imageFromFile(file);
+  const srcW=img.width||img.naturalWidth,srcH=img.height||img.naturalHeight;
+  if(!srcW||!srcH)throw new Error('No se pudo leer la imagen.');
+
+  const input=document.createElement('canvas');
+  const maxSide=1280;
+  const scale=Math.min(1,maxSide/Math.max(srcW,srcH));
+  input.width=Math.round(srcW*scale);input.height=Math.round(srcH*scale);
+  const ictx=input.getContext('2d',{willReadFrequently:true});
+  ictx.drawImage(img,0,0,input.width,input.height);
+
+  const seg=await getSegmenter();
+  const dataUrl=input.toDataURL('image/jpeg',.88);
+  const results=await seg(dataUrl);
+  const wanted=(results||[]).filter(x=>/^(car|truck|bus|van)$/i.test(String(x.label||'')));
+  if(!wanted.length)throw new Error('La IA no ha podido aislar el vehículo en esta foto. Prueba con una foto donde el coche se vea completo.');
+
+  const maskCanvas=document.createElement('canvas');maskCanvas.width=input.width;maskCanvas.height=input.height;
+  const mctx=maskCanvas.getContext('2d');
+  for(const item of wanted){
+    let mc=null;
+    if(item.mask?.toCanvas)mc=item.mask.toCanvas();
+    else if(item.mask?.canvas)mc=item.mask.canvas;
+    if(mc)mctx.drawImage(mc,0,0,input.width,input.height);
+  }
+
+  const cut=document.createElement('canvas');cut.width=input.width;cut.height=input.height;
+  const cctx=cut.getContext('2d',{willReadFrequently:true});cctx.drawImage(input,0,0);
+  cctx.globalCompositeOperation='destination-in';cctx.drawImage(maskCanvas,0,0);cctx.globalCompositeOperation='source-over';
+
+  const px=cctx.getImageData(0,0,cut.width,cut.height).data;
+  let minX=cut.width,minY=cut.height,maxX=0,maxY=0,found=false;
+  for(let y=0;y<cut.height;y+=2){for(let x=0;x<cut.width;x+=2){if(px[(y*cut.width+x)*4+3]>35){found=true;minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y)}}}
+  if(!found)throw new Error('No se pudo crear el recorte del coche.');
+
+  const out=document.createElement('canvas');out.width=1600;out.height=1000;
+  const o=out.getContext('2d');drawShowroom(o,out.width,out.height);
+  const cw=Math.max(1,maxX-minX),ch=Math.max(1,maxY-minY);
+  const fit=Math.min(out.width*.70/cw,out.height*.54/ch);
+  const dw=cw*fit,dh=ch*fit,dx=(out.width-dw)/2,dy=out.height*.69-dh;
+  o.shadowColor='rgba(0,0,0,.45)';o.shadowBlur=25;o.shadowOffsetY=18;
+  o.drawImage(cut,minX,minY,cw,ch,dx,dy,dw,dh);o.shadowBlur=0;o.shadowOffsetY=0;
+
+  return await new Promise((resolve,reject)=>out.toBlob(b=>b?resolve(new File([b],`glow-${Date.now()}.jpg`,{type:'image/jpeg'})):reject(new Error('No se pudo generar la foto final.')),'image/jpeg',.91));
+}
+
+async function install(){
+  const w=frame.contentWindow,d=frame.contentDocument;
+  if(!d||d.__glowBackgroundInstalled)return;
+  const filters=d.querySelector('.filters');
+  if(!filters)return setTimeout(install,100);
+  d.__glowBackgroundInstalled=true;
+
+  const searchBox=d.createElement('div');
+  searchBox.style.cssText='display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap';
+  searchBox.innerHTML='<input id="glowVehicleSearch" type="search" placeholder="🔎 Buscar coche: BMW, X6M, Mercedes..." autocomplete="off" style="flex:1;min-width:220px;background:#090909;color:#fff;border:1px solid #333;border-radius:8px;padding:11px;font:inherit">';
+  filters.parentNode.insertBefore(searchBox,filters);
+  const search=d.getElementById('glowVehicleSearch');
+  const applySearch=()=>{const q=search.value.trim().toLocaleLowerCase('es');d.querySelectorAll('#cars .car').forEach(card=>card.style.display=(!q||(card.textContent||'').toLocaleLowerCase('es').includes(q))?'':'none')};
+  search.addEventListener('input',applySearch);
+
+  function addToggle(fileInput,statusId){
+    if(!fileInput||fileInput.parentElement.querySelector('.glow-bg-toggle'))return;
+    const box=d.createElement('div');box.className='glow-bg-toggle';
+    box.style.cssText='margin:10px 0;padding:12px;border:1px solid #6b5426;border-radius:10px;background:#17130b;color:#ddd';
+    box.innerHTML='<label style="display:flex;gap:9px;align-items:flex-start;cursor:pointer"><input class="glowBgCheck" type="checkbox" checked style="margin-top:3px"><span><b style="color:#d8b36a">✨ Fondo GLOW CARS automático</b><br><small style="color:#999">La web intentará aislar el coche con IA, centrarlo y colocarlo siempre en el mismo showroom. La foto original se guarda aparte como copia.</small></span></label>';
+    fileInput.insertAdjacentElement('afterend',box);
+    return box.querySelector('.glowBgCheck');
+  }
+  const newToggle=addToggle(d.getElementById('newfiles'),'uploadStatus');
+  const editInputs=[...d.querySelectorAll('#editfiles')];
+  editInputs.forEach(el=>addToggle(el,'editUploadStatus'));
+
+  const oldUpload=w.uploadFiles;
+  w.uploadFiles=async function(files){
+    const toggle=d.querySelector('#newfiles + .glow-bg-toggle .glowBgCheck');
+    if(!toggle?.checked)return oldUpload(files);
+    const urls=[];
+    for(let i=0;i<files.length;i++){
+      const f=files[i];const stamp=Date.now()+'-'+Math.random().toString(36).slice(2);
+      d.getElementById('uploadStatus').textContent=`Foto ${i+1}/${files.length}: guardando original…`;
+      await uploadRaw(f,`cars-originales/${stamp}-${f.name.replace(/[^a-z0-9._-]/gi,'_')}`);
+      const processed=await processVehiclePhoto(f,msg=>d.getElementById('uploadStatus').textContent=`Foto ${i+1}/${files.length}: ${msg}`);
+      d.getElementById('uploadStatus').textContent=`Foto ${i+1}/${files.length}: subiendo showroom…`;
+      urls.push(await uploadRaw(processed,`cars/${stamp}-showroom.jpg`));
+      const bar=d.getElementById('bar');if(bar)bar.style.width=((i+1)/files.length*100)+'%';
+    }
+    return urls;
+  };
+
+  const oldEdit=w.uploadEditFiles;
+  w.uploadEditFiles=async function(files){
+    const checked=[...d.querySelectorAll('.glow-bg-toggle .glowBgCheck')].some(x=>x.checked&&x.closest('.upload')?.querySelector('#editfiles'));
+    if(!checked)return oldEdit(files);
+    const urls=[];
+    for(let i=0;i<files.length;i++){
+      const f=files[i];const stamp=Date.now()+'-'+Math.random().toString(36).slice(2);
+      d.getElementById('editUploadStatus').textContent=`Foto ${i+1}/${files.length}: guardando original…`;
+      await uploadRaw(f,`cars-originales/${stamp}-${f.name.replace(/[^a-z0-9._-]/gi,'_')}`);
+      const processed=await processVehiclePhoto(f,msg=>d.getElementById('editUploadStatus').textContent=`Foto ${i+1}/${files.length}: ${msg}`);
+      d.getElementById('editUploadStatus').textContent=`Foto ${i+1}/${files.length}: subiendo showroom…`;
+      urls.push(await uploadRaw(processed,`cars/${stamp}-showroom.jpg`));
+      const b=d.getElementById('editbar')||d.getElementById('editBar');if(b)b.style.width=((i+1)/files.length*100)+'%';
+    }
+    return urls;
+  };
+
+  d.addEventListener('change',e=>{
+    if(e.target?.id==='newfiles'&&newToggle?.checked)d.getElementById('uploadStatus').textContent='✨ Fotos seleccionadas. Al guardar se aislará el coche y se aplicará el showroom GLOW CARS.';
+    if(e.target?.id==='editfiles')d.getElementById('editUploadStatus').textContent='✨ Fotos seleccionadas. Al guardar se procesarán con el showroom GLOW CARS.';
+  });
+
+  const oldLoad=w.load;
+  if(typeof oldLoad==='function')w.load=function(){const r=oldLoad.apply(this,arguments);Promise.resolve(r).then(()=>setTimeout(applySearch,60));return r};
+}
+frame.addEventListener('load',()=>setTimeout(install,120));
+</script>
+</body>
+</html>
