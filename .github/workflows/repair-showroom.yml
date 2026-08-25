@@ -1,0 +1,37 @@
+name: Reparar showroom
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/repair-showroom.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reencode JPEG to clean PNG
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageFile
+          ImageFile.LOAD_TRUNCATED_IMAGES = True
+          src='assets/showroom-aprobado-real-v1.jpg'
+          dst='assets/showroom-aprobado-real-clean.png'
+          im=Image.open(src)
+          im.load()
+          if im.mode not in ('RGB','RGBA'):
+              im=im.convert('RGB')
+          im.save(dst, 'PNG', optimize=True)
+          print('saved', dst, im.size, im.mode)
+          PY
+      - name: Commit repaired image
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/showroom-aprobado-real-clean.png
+          git commit -m 'Repair showroom image for Safari' || exit 0
+          git push
