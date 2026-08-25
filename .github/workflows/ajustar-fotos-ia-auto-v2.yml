@@ -1,0 +1,33 @@
+name: Ajustar Fotos IA auto v2
+on:
+  push:
+    paths:
+      - '.github/workflows/ajustar-fotos-ia-auto-v2.yml'
+permissions:
+  contents: write
+jobs:
+  adjust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ajustar composición automática
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('fotos-ia.html')
+          s=p.read_text()
+          s=s.replace('Automático · se adapta al showroom','Automático v2 · tamaño y posición adaptativos')
+          old="const safeLeft=210,safeRight=1390,safeTop=390,safeBottom=865,maxW=safeRight-safeLeft,maxH=safeBottom-safeTop,fit=Math.min(maxW/b.sw,maxH/b.sh),dw=b.sw*fit,dh=b.sh*fit,dx=safeLeft+(maxW-dw)/2,ground=safeBottom,dy=ground-dh,shadowX=dx+dw*.5;"
+          new="const maxW=1000,maxH=430,fit=Math.min(maxW/b.sw,maxH/b.sh),dw=b.sw*fit,dh=b.sh*fit,dx=(1600-dw)/2,ground=825,dy=ground-dh,shadowX=dx+dw*.5;"
+          if old not in s:
+              raise SystemExit('No se encontró el bloque de composición esperado')
+          s=s.replace(old,new)
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'glowcarssl'
+          git config user.email 'diegopascual9722@gmail.com'
+          git add fotos-ia.html
+          git commit -m 'Fotos IA auto v2: coche más pequeño y centrado'
+          git push
