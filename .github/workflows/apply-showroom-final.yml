@@ -1,0 +1,46 @@
+name: Apply final showroom
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-showroom-final.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract and save showroom image
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, base64
+          src=Path('.github/workflows/upload-showroom-final.yml').read_text(encoding='utf-8')
+          m=re.search(r"data = '''(.*?)'''", src, re.S)
+          if not m:
+              raise SystemExit('Embedded showroom data not found')
+          out=Path('assets/showroom-glow-final.jpg')
+          out.parent.mkdir(exist_ok=True)
+          out.write_bytes(base64.b64decode(m.group(1)))
+          print('saved', out, out.stat().st_size)
+          PY
+      - name: Point Fotos IA to final showroom
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          for name in ['fotos-ia.html','fotos-ia-v2.html','fotos-ia-v3.html','fotos-ia-v4.html']:
+              p=Path(name)
+              if not p.exists():
+                  continue
+              s=p.read_text(encoding='utf-8')
+              s=re.sub(r'assets/showroom[^\"\'\s]+\.(?:jpg|jpeg|png|svg)', 'assets/showroom-glow-final.jpg', s)
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit final showroom
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/showroom-glow-final.jpg fotos-ia*.html || true
+          git commit -m 'Apply approved GLOW CARS showroom background' || exit 0
+          git push
