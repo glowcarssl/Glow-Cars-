@@ -1,51 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
 <defs>
-  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050505"/><stop offset="0.48" stop-color="#101010"/><stop offset="1" stop-color="#060606"/></linearGradient>
-  <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#171717"/><stop offset="0.42" stop-color="#0c0c0c"/><stop offset="1" stop-color="#030303"/></linearGradient>
-  <radialGradient id="stage" cx="50%" cy="34%" r="72%"><stop offset="0" stop-color="#252525"/><stop offset="0.55" stop-color="#151515"/><stop offset="1" stop-color="#080808"/></radialGradient>
-  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b4"/><stop offset="0.18" stop-color="#e6b456"/><stop offset="0.5" stop-color="#fff0af"/><stop offset="0.74" stop-color="#b66e19"/><stop offset="1" stop-color="#f8c86c"/></linearGradient>
-  <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#292929"/><stop offset="0.55" stop-color="#090909"/><stop offset="1" stop-color="#020202"/></linearGradient>
-  <linearGradient id="light" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffb84c" stop-opacity="0"/><stop offset="0.38" stop-color="#ffb84c" stop-opacity=".18"/><stop offset="0.5" stop-color="#ffd184"/><stop offset="0.62" stop-color="#ffb84c" stop-opacity=".18"/><stop offset="1" stop-color="#ffb84c" stop-opacity="0"/></linearGradient>
-  <radialGradient id="floorGlow"><stop offset="0" stop-color="#e99a35" stop-opacity=".24"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
-  <filter id="blur"><feGaussianBlur stdDeviation="22"/></filter>
-  <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-  <filter id="soft"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity=".85"/></filter>
-  <pattern id="tiles" width="120" height="90" patternUnits="userSpaceOnUse"><path d="M0 0H120V90H0Z" fill="none" stroke="#fff" stroke-opacity=".025" stroke-width="1"/><path d="M0 45H120M60 0V90" stroke="#fff" stroke-opacity=".012"/></pattern>
+<linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070707"/><stop offset=".55" stop-color="#0d0d0d"/><stop offset="1" stop-color="#050505"/></linearGradient>
+<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#171717"/><stop offset="1" stop-color="#030303"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe6a0"/><stop offset=".28" stop-color="#d79a37"/><stop offset=".56" stop-color="#fff0b5"/><stop offset="1" stop-color="#a86518"/></linearGradient>
+<linearGradient id="stage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#242424"/><stop offset="1" stop-color="#090909"/></linearGradient>
+<radialGradient id="halo"><stop offset="0" stop-color="#c98328" stop-opacity=".24"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<pattern id="marble" width="260" height="220" patternUnits="userSpaceOnUse"><rect width="260" height="220" fill="#080808"/><path d="M-20 165 C45 110 60 60 145 34 C205 15 230 -10 285 -45" fill="none" stroke="#8b5c2a" stroke-opacity=".30" stroke-width="3"/><path d="M-10 190 C80 140 95 95 175 72 C218 59 242 25 282 5" fill="none" stroke="#d7b16e" stroke-opacity=".14" stroke-width="1.5"/><path d="M20 20 C90 75 150 90 260 62" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
+<filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
+<filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity=".9"/></filter>
 </defs>
 <rect width="1600" height="620" fill="url(#wall)"/>
 <rect y="620" width="1600" height="380" fill="url(#floor)"/>
-<rect y="620" width="1600" height="380" fill="url(#tiles)" opacity=".8"/>
-<!-- wall panels -->
-<g stroke="#fff" stroke-opacity=".045" stroke-width="2">
- <path d="M0 0V620M250 0V620M500 0V620M800 0V620M1100 0V620M1350 0V620M1600 0V620"/>
-</g>
-<!-- vertical premium lights -->
-<g>
- <rect x="108" width="58" height="620" fill="url(#light)"/><rect x="139" y="38" width="4" height="535" rx="2" fill="#ffd27e" filter="url(#glow)"/>
- <rect x="342" width="58" height="620" fill="url(#light)"/><rect x="371" y="38" width="4" height="535" rx="2" fill="#ffd27e" filter="url(#glow)"/>
- <rect x="1200" width="58" height="620" fill="url(#light)"/><rect x="1229" y="38" width="4" height="535" rx="2" fill="#ffd27e" filter="url(#glow)"/>
- <rect x="1434" width="58" height="620" fill="url(#light)"/><rect x="1463" y="38" width="4" height="535" rx="2" fill="#ffd27e" filter="url(#glow)"/>
-</g>
-<!-- subtle floor reflections -->
-<g opacity=".3" filter="url(#blur)"><rect x="122" y="600" width="36" height="280" fill="#dc8d2f"/><rect x="354" y="600" width="36" height="230" fill="#dc8d2f"/><rect x="1212" y="600" width="36" height="230" fill="#dc8d2f"/><rect x="1446" y="600" width="36" height="280" fill="#dc8d2f"/></g>
-<!-- logo and silhouette -->
-<g filter="url(#soft)">
- <path d="M520 210 C635 122 790 112 918 153 C970 170 1018 195 1066 218 C1012 216 972 215 925 215 C795 192 660 196 545 226 C510 234 483 239 448 239 C470 228 493 218 520 210Z" fill="none" stroke="url(#gold)" stroke-width="10" stroke-linecap="round"/>
- <path d="M598 199 C681 137 786 124 871 143" fill="none" stroke="#ffe8a4" stroke-width="5" stroke-linecap="round" opacity=".8"/>
- <text x="800" y="355" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="130" font-weight="800" letter-spacing="7" fill="url(#gold)" stroke="#5c3510" stroke-width="2">GLOW CARS</text>
-</g>
-<!-- diffuse logo halo -->
-<ellipse cx="800" cy="306" rx="450" ry="150" fill="#d88b2e" opacity=".055" filter="url(#blur)"/>
-<!-- platform glow -->
-<ellipse cx="800" cy="850" rx="720" ry="188" fill="url(#floorGlow)" filter="url(#blur)"/>
-<!-- raised stage -->
-<ellipse cx="800" cy="794" rx="705" ry="176" fill="url(#edge)" stroke="#42301c" stroke-width="3"/>
-<path d="M95 794 C95 891 410 970 800 970 C1190 970 1505 891 1505 794 L1505 845 C1505 942 1190 1000 800 1000 C410 1000 95 942 95 845Z" fill="#050505"/>
-<ellipse cx="800" cy="784" rx="682" ry="158" fill="url(#stage)" stroke="#494949" stroke-width="3"/>
-<ellipse cx="800" cy="795" rx="703" ry="176" fill="none" stroke="#ffbb58" stroke-width="10" opacity=".30" filter="url(#glow)"/>
-<ellipse cx="800" cy="795" rx="703" ry="176" fill="none" stroke="url(#gold)" stroke-width="4"/>
-<ellipse cx="800" cy="760" rx="530" ry="100" fill="#fff" opacity=".018" filter="url(#blur)"/>
-<!-- front luminous lip -->
-<path d="M135 853 C290 954 531 985 800 985 C1069 985 1310 954 1465 853" fill="none" stroke="#ffb84d" stroke-width="7" opacity=".58" filter="url(#glow)"/>
-<path d="M135 853 C290 954 531 985 800 985 C1069 985 1310 954 1465 853" fill="none" stroke="#ffd484" stroke-width="2.5"/>
+<!-- premium ceiling -->
+<rect x="0" y="0" width="1600" height="105" fill="#030303"/>
+<path d="M180 82 H1420" stroke="#d79a37" stroke-opacity=".35" stroke-width="2"/>
+<rect x="290" y="43" width="1020" height="5" rx="2.5" fill="#ffd67f" opacity=".9" filter="url(#glow)"/>
+<!-- central marble wall -->
+<rect x="365" y="120" width="870" height="500" rx="3" fill="url(#marble)" stroke="#322414" stroke-width="2"/>
+<rect x="392" y="146" width="816" height="446" rx="2" fill="none" stroke="#d99b3d" stroke-opacity=".38" stroke-width="2"/>
+<!-- vertical architectural strips -->
+<g fill="#0a0a0a" stroke="#1f1f1f"><rect x="0" y="105" width="310" height="515"/><rect x="1290" y="105" width="310" height="515"/></g>
+<g stroke="#ffd27e" stroke-width="4" filter="url(#glow)" opacity=".95"><path d="M140 145V570"/><path d="M255 145V570"/><path d="M1345 145V570"/><path d="M1460 145V570"/></g>
+<!-- side shelving -->
+<g opacity=".95"><rect x="1325" y="265" width="210" height="285" rx="4" fill="#0b0b0b" stroke="#3d2c18"/><path d="M1345 330H1515M1345 400H1515M1345 470H1515" stroke="#d89b3e" stroke-opacity=".45"/><circle cx="1380" cy="306" r="12" fill="#d5a24b"/><rect x="1445" y="292" width="38" height="22" rx="5" fill="#222"/><rect x="1375" y="360" width="62" height="23" rx="5" fill="#1d1d1d"/><circle cx="1480" cy="444" r="14" fill="#b77b2a"/></g>
+<!-- plant silhouette -->
+<g transform="translate(190 430)"><ellipse cx="0" cy="116" rx="52" ry="16" fill="#020202"/><rect x="-30" y="66" width="60" height="65" rx="15" fill="#0d0d0d" stroke="#5d421f"/><g fill="#182715"><ellipse cx="-20" cy="20" rx="18" ry="62" transform="rotate(-36 -20 20)"/><ellipse cx="22" cy="4" rx="17" ry="66" transform="rotate(32 22 4)"/><ellipse cx="2" cy="-10" rx="16" ry="72"/><ellipse cx="-38" cy="48" rx="14" ry="52" transform="rotate(-58 -38 48)"/><ellipse cx="40" cy="44" rx="14" ry="52" transform="rotate(58 40 44)"/></g></g>
+<!-- logo: text only, no symbol -->
+<g filter="url(#shadow)"><text x="800" y="330" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="118" font-weight="800" letter-spacing="7" fill="url(#gold)">GLOW CARS</text><path d="M590 365H720M880 365H1010" stroke="url(#gold)" stroke-width="2"/><text x="800" y="378" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="700" letter-spacing="8" fill="#dca849">EDICIÓN IA</text></g>
+<!-- floor reflections -->
+<ellipse cx="800" cy="785" rx="680" ry="235" fill="url(#halo)" filter="url(#blur)"/>
+<g opacity=".12" stroke="#fff"><path d="M0 690H1600M0 790H1600M0 900H1600"/><path d="M260 620L165 1000M520 620L455 1000M800 620V1000M1080 620L1145 1000M1340 620L1435 1000"/></g>
+<!-- stage -->
+<ellipse cx="800" cy="820" rx="675" ry="176" fill="#030303" opacity=".95"/>
+<ellipse cx="800" cy="790" rx="650" ry="158" fill="url(#stage)" stroke="#4b351b" stroke-width="4"/>
+<ellipse cx="800" cy="790" rx="648" ry="157" fill="none" stroke="#efb65a" stroke-width="5" filter="url(#glow)" opacity=".9"/>
+<path d="M165 825 C335 940 550 974 800 974 C1050 974 1265 940 1435 825" fill="none" stroke="#f3b657" stroke-width="6" filter="url(#glow)" opacity=".62"/>
+<path d="M165 825 C335 940 550 974 800 974 C1050 974 1265 940 1435 825" fill="none" stroke="#ffe4a0" stroke-width="2"/>
 </svg>
