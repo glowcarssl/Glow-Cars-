@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050505"/><stop offset="0.48" stop-color="#101010"/><stop offset="1" stop-color="#060606"/></linearGradient>
+  <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#171717"/><stop offset="0.42" stop-color="#0c0c0c"/><stop offset="1" stop-color="#030303"/></linearGradient>
+  <radialGradient id="stage" cx="50%" cy="34%" r="72%"><stop offset="0" stop-color="#252525"/><stop offset="0.55" stop-color="#151515"/><stop offset="1" stop-color="#080808"/></radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b4"/><stop offset="0.18" stop-color="#e6b456"/><stop offset="0.5" stop-color="#fff0af"/><stop offset="0.74" stop-color="#b66e19"/><stop offset="1" stop-color="#f8c86c"/></linearGradient>
+  <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#292929"/><stop offset="0.55" stop-color="#090909"/><stop offset="1" stop-color="#020202"/></linearGradient>
+  <linearGradient id="light" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffb84c" stop-opacity="0"/><stop offset="0.38" stop-color="#ffb84c" stop-opacity=".18"/><stop offset="0.5" stop-color="#ffd184"/><stop offset="0.62" stop-color="#ffb84c" stop-opacity=".18"/><stop offset="1" stop-color="#ffb84c" stop-opacity="0"/></linearGradient>
+  <radialGradient id="floorGlow"><stop offset="0" stop-color="#e99a35" stop-opacity=".24"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+  <filter id="blur"><feGaussianBlur stdDeviation="22"/></filter>
+  <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity=".85"/></filter>
+  <pattern id="tiles" width="120" height="90" patternUnits="userSpaceOnUse"><path d="M0 0H120V90H0Z" fill="none" stroke="#fff" stroke-opacity=".025" stroke-width="1"/><path d="M0 45H120M60 0V90" stroke="#fff" stroke-opacity=".012"/></pattern>
+</defs>
+<rect width="1600" height="620" fill="url(#wall)"/>
+<rect y="620" width="1600" height="380" fill="url(#floor)"/>
+<rect y="620" width="1600" height="380" fill="url(#tiles)" opacity=".8"/>
+<!-- wall panels -->
+<g stroke="#fff" stroke-opacity=".045" stroke-width="2">
+ <path d="M0 0V620M250 0V620M500 0V620M800 0V620M1100 0V620M1350 0V620M1600 0V620"/>
+</g>
+<!-- vertical premium lights -->
+<g>
+ <rect x="108" width="58" height="620" fill="url(#light)"/><rect x="139" y="38" width="4" height="535" rx="2" fill="#ffd27e" filter="url(#glow)"/>
+ <rect x="342" width="58" height="620" fill="url(#light)"/><rect x="371" y="38" width="4" height="535" rx="2" fill="#ffd27e" filter="url(#glow)"/>
+ <rect x="1200" width="58" height="620" fill="url(#light)"/><rect x="1229" y="38" width="4" height="535" rx="2" fill="#ffd27e" filter="url(#glow)"/>
+ <rect x="1434" width="58" height="620" fill="url(#light)"/><rect x="1463" y="38" width="4" height="535" rx="2" fill="#ffd27e" filter="url(#glow)"/>
+</g>
+<!-- subtle floor reflections -->
+<g opacity=".3" filter="url(#blur)"><rect x="122" y="600" width="36" height="280" fill="#dc8d2f"/><rect x="354" y="600" width="36" height="230" fill="#dc8d2f"/><rect x="1212" y="600" width="36" height="230" fill="#dc8d2f"/><rect x="1446" y="600" width="36" height="280" fill="#dc8d2f"/></g>
+<!-- logo and silhouette -->
+<g filter="url(#soft)">
+ <path d="M520 210 C635 122 790 112 918 153 C970 170 1018 195 1066 218 C1012 216 972 215 925 215 C795 192 660 196 545 226 C510 234 483 239 448 239 C470 228 493 218 520 210Z" fill="none" stroke="url(#gold)" stroke-width="10" stroke-linecap="round"/>
+ <path d="M598 199 C681 137 786 124 871 143" fill="none" stroke="#ffe8a4" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+ <text x="800" y="355" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="130" font-weight="800" letter-spacing="7" fill="url(#gold)" stroke="#5c3510" stroke-width="2">GLOW CARS</text>
+</g>
+<!-- diffuse logo halo -->
+<ellipse cx="800" cy="306" rx="450" ry="150" fill="#d88b2e" opacity=".055" filter="url(#blur)"/>
+<!-- platform glow -->
+<ellipse cx="800" cy="850" rx="720" ry="188" fill="url(#floorGlow)" filter="url(#blur)"/>
+<!-- raised stage -->
+<ellipse cx="800" cy="794" rx="705" ry="176" fill="url(#edge)" stroke="#42301c" stroke-width="3"/>
+<path d="M95 794 C95 891 410 970 800 970 C1190 970 1505 891 1505 794 L1505 845 C1505 942 1190 1000 800 1000 C410 1000 95 942 95 845Z" fill="#050505"/>
+<ellipse cx="800" cy="784" rx="682" ry="158" fill="url(#stage)" stroke="#494949" stroke-width="3"/>
+<ellipse cx="800" cy="795" rx="703" ry="176" fill="none" stroke="#ffbb58" stroke-width="10" opacity=".30" filter="url(#glow)"/>
+<ellipse cx="800" cy="795" rx="703" ry="176" fill="none" stroke="url(#gold)" stroke-width="4"/>
+<ellipse cx="800" cy="760" rx="530" ry="100" fill="#fff" opacity=".018" filter="url(#blur)"/>
+<!-- front luminous lip -->
+<path d="M135 853 C290 954 531 985 800 985 C1069 985 1310 954 1465 853" fill="none" stroke="#ffb84d" stroke-width="7" opacity=".58" filter="url(#glow)"/>
+<path d="M135 853 C290 954 531 985 800 985 C1069 985 1310 954 1465 853" fill="none" stroke="#ffd484" stroke-width="2.5"/>
+</svg>
