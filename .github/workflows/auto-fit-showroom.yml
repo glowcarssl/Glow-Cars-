@@ -1,0 +1,35 @@
+name: Auto fit showroom car
+on:
+  push:
+    paths:
+      - '.github/workflows/auto-fit-showroom.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch automatic sizing
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('fotos-ia.html')
+          s=p.read_text()
+          old='<div class="field"><label>Tamaño del coche</label><div class="sizeRow"><input id="scale" type="range" min="95" max="135" value="116"><span class="pill" id="scaleVal">116%</span></div></div>'
+          new='<div class="field"><label>Tamaño del coche</label><div class="pill" style="text-align:left;padding:12px">Automático · se adapta al showroom</div></div>'
+          s=s.replace(old,new)
+          old2="const scale=Number($('scale').value)/100,maxW=1500*scale,maxH=790*scale,fit=Math.min(maxW/b.sw,maxH/b.sh),dw=b.sw*fit,dh=b.sh*fit,dx=(1600-dw)/2,ground=968,dy=ground-dh,shadowX=dx+dw*.5;"
+          new2="const safeLeft=210,safeRight=1390,safeTop=390,safeBottom=865,maxW=safeRight-safeLeft,maxH=safeBottom-safeTop,fit=Math.min(maxW/b.sw,maxH/b.sh),dw=b.sw*fit,dh=b.sh*fit,dx=safeLeft+(maxW-dw)/2,ground=safeBottom,dy=ground-dh,shadowX=dx+dw*.5;"
+          s=s.replace(old2,new2)
+          old3="$('scale').oninput=function(){$('scaleVal').textContent=this.value+'%';if(lastFile&&bgImg)preview()};"
+          s=s.replace(old3,'')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name glowcarssl
+          git config user.email diegopascual9722@gmail.com
+          git add fotos-ia.html
+          git commit -m "Ajuste automático del coche en showroom" || exit 0
+          git push
