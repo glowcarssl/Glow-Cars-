@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#080706"/><stop offset=".55" stop-color="#11100e"/><stop offset="1" stop-color="#070707"/></linearGradient>
+  <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#181715"/><stop offset="1" stop-color="#050505"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0b9"/><stop offset=".35" stop-color="#d9a23f"/><stop offset=".65" stop-color="#f4d384"/><stop offset="1" stop-color="#a96a18"/></linearGradient>
+  <radialGradient id="warm" cx="50%" cy="70%" r="70%"><stop offset="0" stop-color="#b96d17" stop-opacity=".13"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft"><feGaussianBlur stdDeviation="22"/></filter>
+  <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#000" flood-opacity=".85"/></filter>
+</defs>
+<rect width="1600" height="670" fill="url(#wall)"/>
+<rect y="670" width="1600" height="330" fill="url(#floor)"/>
+<rect width="1600" height="1000" fill="url(#warm)"/>
+
+<!-- wall panels -->
+<g stroke="#24211d" stroke-width="2" fill="none" opacity=".9">
+  <path d="M0 0V670M230 0V670M460 0V670M1140 0V670M1370 0V670M1600 0V670"/>
+</g>
+<rect x="270" y="80" width="1060" height="560" rx="4" fill="#0c0b0a" stroke="#2a2117"/>
+
+<!-- vertical light bars like approved mockup -->
+<g stroke="#f0b54f" stroke-width="5" filter="url(#glow)">
+  <path d="M250 110V650"/><path d="M1350 110V650"/>
+</g>
+<g stroke="#ffd989" stroke-width="2" opacity=".9">
+  <path d="M250 110V650"/><path d="M1350 110V650"/>
+</g>
+
+<!-- side dark fluted walls -->
+<g opacity=".6" stroke="#1d1d1d" stroke-width="10">
+  <path d="M30 110V650M55 110V650M80 110V650M105 110V650M130 110V650M1470 110V650M1495 110V650M1520 110V650M1545 110V650M1570 110V650"/>
+</g>
+
+<!-- plants -->
+<g transform="translate(115 500)"><ellipse cx="0" cy="125" rx="52" ry="15" fill="#020202"/><rect x="-31" y="72" width="62" height="66" rx="12" fill="#0c0c0c"/><g fill="#203018"><ellipse cx="-26" cy="8" rx="16" ry="66" transform="rotate(-38 -26 8)"/><ellipse cx="22" cy="-4" rx="15" ry="72" transform="rotate(34 22 -4)"/><ellipse cx="0" cy="-16" rx="15" ry="78"/><ellipse cx="-42" cy="45" rx="13" ry="52" transform="rotate(-58 -42 45)"/><ellipse cx="43" cy="42" rx="13" ry="54" transform="rotate(58 43 42)"/></g></g>
+<g transform="translate(1480 500)"><ellipse cx="0" cy="125" rx="52" ry="15" fill="#020202"/><rect x="-31" y="72" width="62" height="66" rx="12" fill="#0c0c0c"/><g fill="#203018"><ellipse cx="-26" cy="8" rx="16" ry="66" transform="rotate(-38 -26 8)"/><ellipse cx="22" cy="-4" rx="15" ry="72" transform="rotate(34 22 -4)"/><ellipse cx="0" cy="-16" rx="15" ry="78"/><ellipse cx="-42" cy="45" rx="13" ry="52" transform="rotate(-58 -42 45)"/><ellipse cx="43" cy="42" rx="13" ry="54" transform="rotate(58 43 42)"/></g></g>
+
+<!-- approved-style branding -->
+<g filter="url(#shadow)">
+  <path d="M520 210 C625 145 755 145 835 170 C930 198 1010 175 1090 150 C1060 195 1000 220 900 220 C805 220 700 200 600 220 C565 228 540 224 520 210Z" fill="url(#gold)" opacity=".9"/>
+  <text x="800" y="345" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="118" font-weight="900" letter-spacing="7" fill="#e8e2d7">GLOW CARS</text>
+  <path d="M590 386H720M880 386H1010" stroke="url(#gold)" stroke-width="3"/>
+  <text x="800" y="400" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="700" letter-spacing="8" fill="#d8a13d">PREMIUM SELECTION</text>
+</g>
+
+<!-- flat reflective showroom floor, no platform -->
+<ellipse cx="800" cy="860" rx="720" ry="205" fill="#b97922" opacity=".08" filter="url(#soft)"/>
+<g opacity=".12" stroke="#c9c9c9" stroke-width="1">
+  <path d="M0 760H1600M0 855H1600M0 940H1600"/>
+  <path d="M240 670L150 1000M480 670L440 1000M800 670V1000M1120 670L1160 1000M1360 670L1450 1000"/>
+</g>
+<path d="M0 670H1600" stroke="#d69b39" stroke-opacity=".25"/>
+</svg>
