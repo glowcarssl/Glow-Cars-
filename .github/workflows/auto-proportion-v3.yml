@@ -1,0 +1,34 @@
+name: Auto proporcion coche v3
+on:
+  push:
+    paths:
+      - '.github/workflows/auto-proportion-v3.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ajustar proporcion automatica
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('fotos-ia.html')
+          s=p.read_text()
+          s=s.replace("if(d[(y*c.width+x)*4+3]>30)","if(d[(y*c.width+x)*4+3]>80)")
+          old="const maxW=1000,maxH=430,fit=Math.min(maxW/b.sw,maxH/b.sh),dw=b.sw*fit,dh=b.sh*fit,dx=(1600-dw)/2,ground=825,dy=ground-dh,shadowX=dx+dw*.5;"
+          new="const ar=b.sw/b.sh;let targetW=ar>=2.2?1080:ar>=1.8?1040:ar>=1.5?980:ar>=1.3?900:820;let targetH=targetW/ar;const maxH=560;if(targetH>maxH){targetH=maxH;targetW=maxH*ar}const fit=Math.min(targetW/b.sw,targetH/b.sh),dw=b.sw*fit,dh=b.sh*fit,dx=(1600-dw)/2,ground=885,dy=ground-dh,shadowX=dx+dw*.5;"
+          if old not in s:
+              raise SystemExit('No se encontró la fórmula anterior')
+          s=s.replace(old,new)
+          s=s.replace('Automático v2 · tamaño y posición adaptativos','Automático v3 · proporción visual inteligente')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "glowcarssl"
+          git config user.email "diegopascual9722@gmail.com"
+          git add fotos-ia.html
+          git commit -m "Ajustar proporcion automatica del coche v3" || exit 0
+          git push
