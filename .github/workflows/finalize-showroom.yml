@@ -1,0 +1,36 @@
+name: Finalizar showroom GLOW CARS
+
+on:
+  push:
+    paths:
+      - '.github/workflows/finalize-showroom.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruir JPG
+        run: |
+          cat .tmp-showroom/part0.txt .tmp-showroom/part1.txt .tmp-showroom/part2.txt .tmp-showroom/part3.txt | base64 -d > assets/showroom-glow-final.jpg
+          python -m pip install --upgrade pillow
+          python - <<'PY'
+          from PIL import Image
+          p='assets/showroom-glow-final.jpg'
+          im=Image.open(p)
+          im.verify()
+          print('SHOWROOM_OK', im.format, im.size)
+          PY
+          test "$(stat -c%s assets/showroom-glow-final.jpg)" -gt 10000
+      - name: Publicar imagen limpia
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/showroom-glow-final.jpg
+          git rm -r .tmp-showroom
+          git rm .github/workflows/finalize-showroom.yml
+          git commit -m 'Publish verified GLOW CARS showroom image'
+          git push
