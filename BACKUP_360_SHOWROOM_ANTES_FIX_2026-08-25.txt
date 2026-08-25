@@ -1,0 +1,6 @@
+Copia de seguridad lógica antes de corregir el visor 360 con escenario IA.
+Archivo: 360-showroom-prueba.html
+Blob SHA anterior: 0c3e41386c4cbdccfa89a9a581e233fe43ca95d6
+Fecha: 2026-08-25
+Motivo: eliminar efecto fantasma por interpolación, recorte radial y estabilizar el encuadre.
+El contenido anterior queda recuperable por este SHA y por el historial de Git.
