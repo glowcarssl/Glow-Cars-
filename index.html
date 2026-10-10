@@ -541,9 +541,9 @@ Puedes enviar este vehículo directamente a un cliente.
 
 <script>
 
-const U='https://hqsiglpdnylsfbideglc.supabase.co';
-const K='sb_publishable_elNqKmc2_3zpeDxrlFKMFw_RdDz4nXz';
-const T='GLOW-CARS';
+const U='https://geztxedkzckbnijmkpkh.supabase.co';
+const K='sb_publishable_LRN_urSBqO5rfuoki5C28g_qu08nJWk';
+const T='vehicles';
 
 let vehicles=[];
 let photos=[];
@@ -668,7 +668,7 @@ if(!r.ok){
 throw new Error(await r.text());
 }
 
-vehicles=await r.json();
+vehicles=(await r.json()).map(c=>({...c,'Marca-modelo':c.name,Precio:c.price,Año:c.year,'Kilómetros':c.mileage,Combustible:c.fuel,Cambio:c.transmission,Descripción:c.description,Imagen:(Array.isArray(c.image_urls)&&c.image_urls.length?c.image_urls:[c.image_path]).filter(Boolean).join(','),estado:c.status==='V'?'vendido':c.status==='R'?'reservado':'disponible'}));
 
 if(!Array.isArray(vehicles)){
 vehicles=[];
