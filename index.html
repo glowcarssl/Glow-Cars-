@@ -21,7 +21,7 @@ a{text-decoration:none;color:inherit}
 header{position:fixed;z-index:20;top:0;width:100%;background:rgba(5,5,5,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav{min-height:76px;display:flex;align-items:center;gap:20px}
 .logo{margin-right:auto}
-.logo{display:block;flex:1;min-width:0;max-width:460px}.logo img{width:100%;height:130px;max-height:none;object-fit:cover;object-position:center;display:block;border-radius:8px}
+.logo{display:block;flex:1;min-width:0;max-width:650px}.logo img{width:100%;height:auto;aspect-ratio:1200/260;object-fit:contain;display:block;border-radius:8px}
 nav{display:flex;gap:18px;color:#ccc;font-size:14px}
 nav a:hover{color:var(--gold)}
 .contact-head{display:flex;gap:8px}
@@ -127,7 +127,7 @@ nav{display:none}
 
 @media(max-width:560px){
 .nav{min-height:70px}
-.logo{max-width:none;flex:1}.logo img{width:100%;height:105px;object-fit:cover;object-position:center}.nav{gap:8px;flex-wrap:wrap}.contact-head{width:100%;justify-content:center}.contact-head a{flex:1;text-align:center}
+.logo{max-width:none;flex:1 0 100%}.logo img{width:100%;height:auto;aspect-ratio:1200/260;object-fit:contain}.nav{gap:8px;flex-wrap:wrap}.contact-head{width:100%;justify-content:center}.contact-head a{flex:1;text-align:center}
 .contact-head a{padding:9px 10px;font-size:12px}
 .contact-head span{display:none}
 .grid,.services,.features,.process-grid,.filters{grid-template-columns:1fr}
@@ -152,7 +152,7 @@ nav{display:none}
 <div class="container nav">
 
 <a class="logo" href="#inicio">
-<img src="8C982453-6D48-46D9-93F0-8BE12D44B720.png" alt="GLOW CARS">
+<img src="glow-cars-cabecera.svg" alt="GLOW CARS">
 </a>
 
 <nav>
