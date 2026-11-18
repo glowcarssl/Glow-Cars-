@@ -16,9 +16,38 @@
 .hero-content>.actions{justify-content:center}
 .hero-bottom{margin-top:50px}
 @media(max-width:720px){.hero{min-height:650px;height:90svh}.hero-logo-stage{padding:130px 5vw 210px}.hero-logo-stage img{width:94vw;max-height:30vh}.hero-content{padding-top:105px}.hero-tagline{font-size:clamp(27px,7vw,43px)!important;margin:auto 0 0!important}.hero-content>p{font-size:12px}.hero-bottom{margin-top:30px}}
+</style><style id="hero-layout-fix">
+/* Mobile-first clean hero: normal document flow, no overlapping layers */
+.hero{height:auto!important;min-height:100svh!important;display:block!important;background:radial-gradient(ellipse at 50% 42%,#25201a 0%,#101012 48%,#070708 88%)!important}
+.hero-shade,.hero-photo,.hero-logo-stage{display:none!important}
+.hero-content{position:relative!important;z-index:3!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:center!important;min-height:100svh!important;padding:145px 0 35px!important;gap:0!important}
+.hero-topline{order:0;width:100%!important;text-align:center!important;justify-content:center!important;margin-bottom:36px!important}
+.hero-topline .kicker{font-size:10px!important;letter-spacing:2.3px!important}
+.hero-brand{order:1;width:100%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px}
+.hero-brand img{display:block;width:min(100%,610px);max-height:340px;object-fit:contain;filter:drop-shadow(0 15px 30px #0009)}
+.hero-tagline{order:2;position:static!important;display:block!important;align-self:auto!important;width:100%!important;margin:0 auto 17px!important;font-family:'Barlow Condensed',Impact,sans-serif!important;font-size:clamp(35px,6vw,70px)!important;line-height:1.05!important;letter-spacing:0!important;text-align:center!important;font-weight:700!important}
+.hero-content>p{order:3;position:static!important;margin:0 auto!important;text-align:center!important;font-size:14px!important;line-height:1.75!important;max-width:490px!important;color:#c9c9c9!important}
+.hero-content>.actions{order:4;position:static!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:12px!important;margin:28px 0 0!important}
+.hero-content>.actions .btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center}
+.hero-bottom{order:5;position:static!important;width:100%!important;margin-top:auto!important;padding-top:42px!important}
+header .nav{min-height:74px!important}
+@media(max-width:720px){
+header .logo{display:none!important}
+header .nav{justify-content:flex-end!important;height:68px!important}
+header .nav-contact{margin-left:auto!important}
+.hero-content{padding:110px 0 26px!important;min-height:100svh!important}
+.hero-topline{margin-bottom:27px!important}
+.hero-brand{margin-bottom:28px!important}
+.hero-brand img{width:min(88vw,440px)!important;max-height:37svh!important}
+.hero-tagline{font-size:clamp(32px,8vw,48px)!important;margin:0 auto 16px!important}
+.hero-content>p{font-size:12px!important;max-width:310px!important}
+.hero-content>.actions{gap:9px!important;margin-top:25px!important;width:100%!important}
+.hero-content>.actions .btn{flex:1 1 145px;max-width:220px;white-space:normal;text-align:center;font-size:9px!important;letter-spacing:1px!important;padding:13px 10px!important}
+.hero-bottom{font-size:8px!important;letter-spacing:1px!important;padding-top:28px!important}
+}
 </style></head><body>
 <header><div class="container nav"><a class="logo" href="#inicio"><img src="8C982453-6D48-46D9-93F0-8BE12D44B720.png" alt="GLOW CARS"></a><nav><a href="#stock">Colección</a><a href="#vendidos">Entregados</a><a href="#servicios">Experiencia</a><a href="#contacto">Contacto</a></nav><a class="nav-contact" href="https://wa.me/34644469249">CONTACTAR ↗</a></div></header>
-<main><section class="hero" id="inicio"><div class="hero-logo-stage" aria-hidden="true"><img src="8C982453-6D48-46D9-93F0-8BE12D44B720.png" alt=""></div><div class="hero-shade"></div><div class="container hero-content"><div class="hero-topline"><span class="kicker">AUTOMOTIVE BOUTIQUE · ELCHE</span><span class="hero-edition">EST. GLOW CARS / 2026</span></div><h1 class="hero-tagline">TU COCHE. <em>TU ESTILO.</em></h1><p>Es cómo llegas. Cómo conduces. Cómo te sientes.<br>Una selección de vehículos con carácter.</p><div class="actions"><a class="btn gold" href="#stock">EXPLORAR COLECCIÓN <span>↗</span></a><a class="btn outline" href="#contacto">CONCIERTA TU VISITA</a></div><div class="hero-bottom"><span>01 — 04 / GLOW CARS</span><a href="#stock">DESLIZA PARA DESCUBRIR ↓</a></div></div></section>
+<main><section class="hero" id="inicio"><div class="hero-shade"></div><div class="container hero-content"><div class="hero-topline"><span class="kicker">AUTOMOTIVE BOUTIQUE · ELCHE</span><span class="hero-edition">EST. GLOW CARS / 2026</span></div><div class="hero-brand"><img src="8C982453-6D48-46D9-93F0-8BE12D44B720.png" alt="GLOW CARS"></div><h1 class="hero-tagline">TU COCHE. <em>TU ESTILO.</em></h1><p>Es cómo llegas. Cómo conduces. Cómo te sientes.<br>Una selección de vehículos con carácter.</p><div class="actions"><a class="btn gold" href="#stock">EXPLORAR COLECCIÓN <span>↗</span></a><a class="btn outline" href="#contacto">CONCIERTA TU VISITA</a></div><div class="hero-bottom"><span>01 — 04 / GLOW CARS</span><a href="#stock">DESLIZA PARA DESCUBRIR ↓</a></div></div></section>
 <div class="container intro-line"><span>ELCHE · ALICANTE</span><span>SELECCIÓN EXCLUSIVA DE OCASIÓN</span><span>GLOW CARS — AUTOMOTIVE BOUTIQUE</span></div>
 <section id="stock"><div class="container"><div class="section-top"><div><div class="kicker">01 — THE COLLECTION</div><h2>ELIGE TU<br><i>PRÓXIMA HISTORIA.</i></h2></div><p>Una selección que habla por sí sola. Explora las unidades disponibles y encuentra la que te representa.</p></div><div class="filters"><input id="search" placeholder="Buscar marca o modelo..." aria-label="Buscar marca o modelo"><select id="year" aria-label="Año"><option value="">Cualquier año</option></select><select id="fuel" aria-label="Combustible"><option value="">Combustible</option></select><select id="gear" aria-label="Cambio"><option value="">Cambio</option></select><select id="maxPrice" aria-label="Precio máximo"><option value="">Precio máximo</option><option value="10000">10.000 €</option><option value="15000">15.000 €</option><option value="20000">20.000 €</option><option value="30000">30.000 €</option><option value="50000">50.000 €</option></select></div><div id="cars" class="grid"><div>Cargando stock...</div></div></div></section>
 <section id="vendidos" class="sold-section"><div class="container"><div class="section-top"><div><div class="kicker">02 — DELIVERED</div><h2>YA TIENEN<br><i>NUEVO DESTINO.</i></h2></div><p>Historias que continúan en manos de sus nuevos propietarios.</p></div><div id="soldCars" class="grid"><div>Cargando vehículos vendidos...</div></div></div></section>
