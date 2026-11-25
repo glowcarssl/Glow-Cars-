@@ -1,0 +1,64 @@
+/* GLOW CARS — Premium Black & Gold refresh. Presentation only; no catalog/admin logic changes. */
+:root{--bg:#08090b;--card:#121316;--gold:#d9b66d;--line:#2a2926}
+body{font-family:Inter,Arial,Helvetica,sans-serif;letter-spacing:.005em;-webkit-font-smoothing:antialiased}
+.container{max-width:1320px}
+header{background:rgba(8,9,11,.91);border-bottom:1px solid rgba(217,182,109,.19)}
+.nav{min-height:84px}
+.logo img{border-radius:0}
+nav a{font-weight:600;transition:color .2s}
+.btn,.contact-head a{transition:transform .2s,background .2s,box-shadow .2s}
+.btn:hover,.contact-head a:hover{transform:translateY(-2px)}
+.btn.gold,.call-head{background:linear-gradient(125deg,#f1d79c,#c99c4e);color:#15110a;box-shadow:0 8px 24px rgba(201,156,78,.14)}
+.btn.outline{border-color:rgba(217,182,109,.55)}
+.btn.outline:hover{border-color:var(--gold);background:rgba(217,182,109,.08)}
+.hero{min-height:88vh;background:radial-gradient(ellipse at 78% 40%,rgba(217,182,109,.13),transparent 40%),linear-gradient(130deg,#141518,#08090b 70%);padding-top:150px}
+.hero-grid{gap:65px}
+.hero h1{font-size:clamp(43px,6.4vw,86px);line-height:1.02;letter-spacing:-.045em;max-width:780px}
+.hero h1 span{background:linear-gradient(100deg,#f2dca8,#c59a50);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:590px;color:#c1bdb6}
+.hero-panel{background:radial-gradient(circle at 50% 45%,#27231d,#101114 70%);border:1px solid rgba(217,182,109,.3);box-shadow:0 25px 80px rgba(0,0,0,.35);overflow:hidden}
+section{scroll-margin-top:95px}
+.title h2,.about h2,.import h2,.tv-box h2,.contact h2{letter-spacing:-.035em;line-height:1.12}
+.eyebrow{color:#e8c784}
+.filters{background:#141518;border:1px solid #302b22;padding:15px;border-radius:16px}
+.filters input,.filters select{background:#0c0d0f;border:1px solid #3b3832;min-height:46px}
+.filters input:focus,.filters select:focus{outline:2px solid rgba(217,182,109,.5);outline-offset:1px}
+.car{background:linear-gradient(180deg,#191a1d,#101114);border-color:#302d28;border-radius:19px;box-shadow:0 8px 30px rgba(0,0,0,.15);transition:transform .25s,border-color .25s,box-shadow .25s}
+.car:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 18px 45px rgba(0,0,0,.34)}
+.car-img{height:255px}
+.car-img img{transition:transform .35s}
+.car:hover .car-img img{transform:scale(1.035)}
+.car-body{padding:23px}
+.car h3{letter-spacing:-.02em}
+.spec{background:#222326;color:#c4c1ba;border:1px solid #30302f}
+.price{color:#e8c784;letter-spacing:-.03em}
+.service,.process,.feature,.tv-card{background:linear-gradient(150deg,#191a1d,#101114);border-color:#302d28}
+.contact{background:radial-gradient(circle at 90% 10%,rgba(217,182,109,.13),transparent 45%),#151516}
+.gallery{backdrop-filter:blur(8px)}
+.gallery-main{border-color:#5c4a2d}
+footer{background:#08090b}
+@media(max-width:1050px){.nav{gap:12px}.hero-grid{gap:30px}}
+@media(max-width:850px){.hero{min-height:auto;padding:155px 0 65px}.hero-panel{min-height:320px}.grid{gap:14px}}
+@media(max-width:560px){
+ .container{width:92%}
+ .nav{min-height:0;padding:10px 0;gap:8px}
+ .logo{flex:1 0 100%;max-width:100%}
+ .logo img{max-height:58px;aspect-ratio:auto;object-fit:contain}
+ .contact-head{gap:6px}
+ .contact-head a{padding:11px 9px;font-size:12px}
+ .hero{padding:155px 0 48px}
+ .hero h1{font-size:clamp(39px,11vw,56px)}
+ .hero p{font-size:16px}
+ .hero-panel{min-height:230px;border-radius:18px}
+ .hero-panel img{max-height:230px}
+ section{padding:62px 0;scroll-margin-top:145px}
+ .title h2{font-size:32px}
+ .filters{grid-template-columns:1fr 1fr;padding:10px}
+ .filters input:first-child{grid-column:1/-1}
+ .grid{grid-template-columns:1fr}
+ .car-img{height:250px}
+ .car-body{padding:20px}
+ .contact h2{font-size:31px}
+ .buttons .btn{min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
